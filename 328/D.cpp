@@ -33,7 +33,34 @@ ll ceil(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
+    string s;
+    cin >> s;
+
+    deque<char> dq,t;
     
+    ll n = si(s);
+
+    rep(i,n){
+        t.push_back(s[i]);
+    }
+
+    while(!t.empty()){
+        char c = t.front();
+        t.pop_front();
+        dq.push_back(c);
+        ll size = dq.size();
+        // if(size < 3) break;
+        if(size >= 3 && dq[size-3] == 'A' && dq[size-2] == 'B' && dq[size-1] == 'C'){
+            for(int i = 0; i < 3; i++){
+                dq.pop_back();
+            } 
+        }
+    }
+
+    for(auto c : dq){
+        cout << c;
+    }
+    cout << endl;
 
     return 0;
 }

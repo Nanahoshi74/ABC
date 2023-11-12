@@ -33,7 +33,33 @@ ll ceil(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
-    
+    ll n,q;
+    cin >> n >> q;
+    string s;
+    cin >> s;
+
+    vector<ll> v;
+    rep(i,n-1){
+        if(s[i] == s[i+1]){
+            v.push_back(i);
+        }
+    }
+
+    ll size = si(v);
+
+    rep(i,q){
+        ll l,r;
+        cin >> l >> r;
+        l--,r--;
+        if(l == r){
+            cout << 0 << endl;
+            continue;
+        }
+        ll ans = size - ((lower_bound(all(v),l)-v.begin()) + (v.end()-lower_bound(all(v),r)));
+        cout << ans << endl;
+    }
+
+
 
     return 0;
 }

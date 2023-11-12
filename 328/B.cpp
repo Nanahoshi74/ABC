@@ -33,7 +33,44 @@ ll ceil(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
-    
+    ll n;
+    cin >> n;
+    vector<ll> d(n+1);
+    rng(i,1,n+1){
+        cin >> d[i];
+    }
+
+    ll ans = 0;
+
+    rng(i,1,n+1){
+        string s = to_string(i);
+        unordered_set<char> st;
+        char z;
+        for(auto cc : s){
+            st.insert(cc);
+        }
+        if(si(st) != 1){
+            continue;
+        }
+        else{
+            z = *st.begin();
+        }
+        rng(j,1,d[i]+1){
+            string t = to_string(j);
+            bool ok = true;
+            for(auto cc : t){
+                if(cc != z){
+                    ok = false;
+                    break;
+                }
+            }
+            if(ok){
+                ans++;
+            }
+        }
+    }
+
+    cout << ans << endl;
 
     return 0;
 }
