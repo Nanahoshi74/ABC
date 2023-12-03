@@ -33,7 +33,31 @@ ll ceil(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
-    
+    ll n;
+    cin >> n;
+    vector<ll> a(n);
+    rep(i,n){
+        cin >> a[i];
+    }
+    auto b = a;
+    sort(all(b));
+
+    vector<ll> z(n);
+    z[0] = b[0];
+
+    rng(i,1,n){
+        z[i] = z[i-1] + b[i];
+    }
+    vector<ll> ans(n);
+    rep(i,n){
+        ll ind = upper_bound(all(b),a[i])-b.begin();
+        ans[i] = z[n-1]-z[ind-1];
+    }
+
+    rep(i,n){
+        cout << ans[i] << " ";
+    }
+    cout << endl;
 
     return 0;
 }

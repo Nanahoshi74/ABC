@@ -33,7 +33,19 @@ ll ceil(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
-    
+    ll n,q;
+    cin >> n >> q;
+
+    vector<string> s(n);
+    rep(i,n){
+        cin >> s[i];
+    }
+
+    rep(i,q){
+        ll a,b,c,d;
+        cin >> a >> b >> c >> d;
+        
+    }
 
     return 0;
 }

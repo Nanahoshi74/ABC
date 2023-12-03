@@ -4,11 +4,10 @@ using namespace atcoder;
 using mint = modint998244353;
 //using mint = modint1000000007;
 // using mint = modint;  /*このときmint::set_mod(mod)のようにしてmodを底にする*/
-typedef long long ll;
-#define rep(i, n) for (ll i = 0; i < (ll)(n); i++)
-#define repi(i,a,b) for(ll i = a; i <= (ll)(b); i++)
-#define rng(i,a,b) for(ll i = a; i < (ll)(b); i++)
-#define rrng(i,a,b) for(ll i = a; i >= (ll)(b); i--)
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define repi(i,a,b) for(int i = a; i <= (int)(b); i++)
+#define rng(i,a,b) for(int i = a; i < (int)(b); i++)
+#define rrng(i,a,b) for(int i = a; i >= (int)(b); i--)
 #define pb push_back
 #define eb emplace_back
 #define pob pop_back
@@ -16,6 +15,7 @@ typedef long long ll;
 #define all(a) a.begin(),a.end()
 #define rall(a) a.rbegin(),a.rend()
 #define ret(x) { cout<<(x)<<endl;}
+typedef long long ll;
 using namespace std;
 using P = pair<ll,ll>;
 const ll LINF = 1001002003004005006ll;
@@ -31,9 +31,37 @@ template<typename T>
 void print(vector<T> &p){rep(i,si(p)) cout << p[i] << " "; cout << endl;}
 ll ceil(ll x , ll y){return (x+y-1)/y;}
 
+vector<pair<char, ll>> encode(const string& str) {
+    ll n = (int)str.size();
+    vector<pair<char, ll>> ret;
+    for (int l = 0; l < n;) {
+        int r = l + 1;
+        for (; r < n && str[l] == str[r]; r++) {};
+        ret.push_back({str[l], r - l});
+        l = r;
+    }
+    return ret;
+}
+
 int main(){
 
-    
+    ll n;
+    cin >> n;
+    string s;
+    cin >> s;
+
+    vector<pair<char,ll>> pa = encode(s);
+    map<char,ll> mp;
+    for(auto p : pa){
+        chmax(mp[p.first],p.second);
+    }
+    ll ans = 0;
+    for(auto p : mp){
+        ans += p.second;
+    }
+
+    cout << ans << endl;
+
 
     return 0;
 }

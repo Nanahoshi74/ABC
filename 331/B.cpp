@@ -33,7 +33,22 @@ ll ceil(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
+    ll n,s,m,l;
+    cin >> n >> s >> m >> l;
     
+    ll ans = INF;
+
+    rep(i,100){
+        rep(j,100){
+            rep(k,100){
+                if(i * 6 + j * 8 + k * 12 >= n){
+                    chmin(ans,i * s + j * m + k * l);
+                }
+            }
+        }
+    }
+
+    cout << ans << endl;
 
     return 0;
 }

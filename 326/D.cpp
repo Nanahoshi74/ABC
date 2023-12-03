@@ -30,112 +30,63 @@ ll getnum(ll x, ll y, ll H, ll W) { (void) H; return (x * W + y);}
 template<typename T>
 void print(vector<T> &p){rep(i,si(p)) cout << p[i] << " "; cout << endl;}
 ll ceil(ll x , ll y){return (x+y-1)/y;}
+ll cnt = 0;
 
 int main(){
 
     ll n;
     cin >> n;
-    string r,c;
-    cin >> r;
-    cin >> c;
+    string R,C;
+    cin >> R;
+    cin >> C;
 
-    vector<string> s(n);
-    rep(i,n){
-       string t;
-       rep(j,n){
-        t += '.';
-       }
-       s[i] = t;
-    }
-
-
-    vector<char> d = {'A','B','C'}; 
-    vector<string> h(5);
-    h[0] = "AC..B";
-    h[1] = ".BA.C";
-    h[2] = "C.BA.";
-    h[3] = "BA.C.";
-    h[4] = "..CBA";
-
-    rep(i,1 << n){
-        rep(j,1 << n){
-            vector<string> z = s;
-            vector<string> prev_z = z;
-            vector<ll> a;
-            vector<ll> b;
-
-            rep(k,n){
-                if(i & (1 << k)) a.push_back(k);
+    auto dfs = [&](auto dfs, char x, vector<string> s) -> bool {
+        if(x == 'D'){
+            string r,c;
+            rep(i,n){
+                rep(j,n){
+                    if(s[i][j] != '.'){
+                        r += s[i][j];
+                        break;
+                    }
+                }
             }
-            rep(k,n){
-                if(j & (1 << k)) b.push_back(k);
+            rep(j,n){
+                rep(i,n){
+                    if(s[i][j] != '.'){
+                        c += s[i][j];
+                        break;
+                    }
+                }
             }
-            // sort(all(a));
-            // sort(all(b));
-            if(si(a) == 3 && si(b) == 3){
-                // bool ok = true;
-                do{
-                    do{
-                        bool ok = true;
-                        z = prev_z;
-                        unordered_set<ll> sa,sb;
-                        rep(li,3){
-                            sa.insert(a[li]);
-                            sb.insert(b[li]);
-                        }
-                        rep(li,5){
-                            rep(lj,5){
-                                if(sa.count(li) && sb.count(lj)){
-                                    z[li][lj] = min(li,lj);
-                                }
-                            }
-                        }
-                        // if(z == h){
-                        //     cout << "yyyy" << endl;
-                        //     return 0;
-                        // }
-                        rep(li,n){
-                            rep(lj,n){
-                                if(z[li][lj] != '.'){
-                                    if(r[li] != z[li][lj]){
-                                        ok = false;
-                                    }
-                                    else{
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        rep(lj,n){
-                            rep(li,n){
-                                if(z[li][lj] != '.'){
-                                    if(c[lj] != z[li][lj]){
-                                        ok = false;
-                                    }
-                                    else{
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        if(ok){
-                            cout << "Yes" << endl;
-                            rep(li,n){
-                                cout << z[li] << endl;
-                            }
-                            return 0;
-                        }
-                        z = prev_z;
-                    }while(next_permutation(all(a)));
-                }while(next_permutation(all(b)));
+            if(r == R && c == C){
+                cout << "Yes" << endl;
+                rep(i,n) cout << s[i] << endl;
+                return true;
             }
-            else{
-                continue;
-            }
+            return false;
         }
-    }
-
-    cout << "No" << endl;
+        vector<ll> p(n);
+        rep(i,n) p[i] = i;
+        do{
+            auto t = s;
+            bool ok = true;
+            rep(i,n){
+                if(t[i][p[i]] != '.') ok = false;
+                t[i][p[i]] = x;
+            }
+            cnt++;
+            if(cnt < 5) rep(i,n){
+                cout << t[i] << endl;
+            }
+            if(cnt < 5) cout << "******************" << endl;
+            if(!ok) continue;
+            if(dfs(dfs,x+1,t)) return true;
+        }while(next_permutation(all(p)));
+        return false;
+    };
+    vector<string> s(n,string(n,'.'));
+    if(!dfs(dfs,'A',s)) cout << "No" << endl;
 
     return 0;
 }

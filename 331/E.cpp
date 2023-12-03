@@ -33,7 +33,44 @@ ll ceil(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
-    
+    ll n,m,l;
+    cin >> n >> m >> l;
+    vector<ll> a(n),b(m);
+    rep(i,n){
+        cin >> a[i];
+    }
+    rep(i,m){
+        cin >> b[i];
+    }
+    vector<unordered_set<ll>> st(n);
+
+    rep(i,l){
+        ll c,d;
+        cin >> c >> d;
+        c--;
+        d--;
+        st[c].insert(d);
+    }
+    ll ans = 0;
+    vector<ll> bi(m);
+    rep(i,m){
+        bi[i] = i;
+    }
+    sort(all(bi),[&](ll i, ll j){
+        return b[i] > b[j];
+    });
+
+    rep(i,n){
+        for(ll j : bi){
+            if(st[i].count(j)){
+                continue;
+            }
+            chmax(ans,a[i] + b[j]);
+            break;
+        }
+    }
+
+    cout << ans << endl;
 
     return 0;
 }

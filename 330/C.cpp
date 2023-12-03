@@ -6,9 +6,9 @@ using mint = modint998244353;
 // using mint = modint;  /*このときmint::set_mod(mod)のようにしてmodを底にする*/
 typedef long long ll;
 #define rep(i, n) for (ll i = 0; i < (ll)(n); i++)
-#define repi(i,a,b) for(ll i = a; i <= (ll)(b); i++)
-#define rng(i,a,b) for(ll i = a; i < (ll)(b); i++)
-#define rrng(i,a,b) for(ll i = a; i >= (ll)(b); i--)
+#define repi(i,a,b) for(int i = a; i <= (int)(b); i++)
+#define rng(i,a,b) for(int i = a; i < (int)(b); i++)
+#define rrng(i,a,b) for(int i = a; i >= (int)(b); i--)
 #define pb push_back
 #define eb emplace_back
 #define pob pop_back
@@ -29,11 +29,31 @@ void chmax(ll& x,ll y){x = max(x,y);}
 ll getnum(ll x, ll y, ll H, ll W) { (void) H; return (x * W + y);}
 template<typename T>
 void print(vector<T> &p){rep(i,si(p)) cout << p[i] << " "; cout << endl;}
-ll ceil(ll x , ll y){return (x+y-1)/y;}
+ll my_ceil(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
-    
+    ll d;
+    cin >> d;
+
+    ll ans = LINF;
+
+    rep(x,LINF){
+        ll c = x*x - d;
+        if(c >= 0){
+            chmin(ans,c);
+        }
+        else{
+            ll y1 = sqrtl(abs(c));
+            // ll y2 = sqrtl(abs(c)) + 1;
+            chmin(ans,abs(y1 *y1 + c));
+            chmin(ans,abs((y1+1) * (y1+1) + c));
+        }
+        if(x * x >= d) break;
+    }
+
+    cout << ans << endl;
+
 
     return 0;
 }

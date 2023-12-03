@@ -4,11 +4,10 @@ using namespace atcoder;
 using mint = modint998244353;
 //using mint = modint1000000007;
 // using mint = modint;  /*このときmint::set_mod(mod)のようにしてmodを底にする*/
-typedef long long ll;
-#define rep(i, n) for (ll i = 0; i < (ll)(n); i++)
-#define repi(i,a,b) for(ll i = a; i <= (ll)(b); i++)
-#define rng(i,a,b) for(ll i = a; i < (ll)(b); i++)
-#define rrng(i,a,b) for(ll i = a; i >= (ll)(b); i--)
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define repi(i,a,b) for(int i = a; i <= (int)(b); i++)
+#define rng(i,a,b) for(int i = a; i < (int)(b); i++)
+#define rrng(i,a,b) for(int i = a; i >= (int)(b); i--)
 #define pb push_back
 #define eb emplace_back
 #define pob pop_back
@@ -16,6 +15,7 @@ typedef long long ll;
 #define all(a) a.begin(),a.end()
 #define rall(a) a.rbegin(),a.rend()
 #define ret(x) { cout<<(x)<<endl;}
+typedef long long ll;
 using namespace std;
 using P = pair<ll,ll>;
 const ll LINF = 1001002003004005006ll;
@@ -33,7 +33,41 @@ ll ceil(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
+    ll n;
+    cin >> n;
+    string s;
+    cin >> s;
     
+    map<char,ll> mp;
+    ll cnt = 0;
+
+    rep(i,n){
+        char c = s[i];
+        if(mp[c] == 0){
+            mp[c]++;
+            cnt++;
+        }
+        else{
+            if(s[i] == s[i-1]){
+                if(cnt + 1 > mp[c]){
+                    mp[c]++;
+                    cnt++;
+                }
+                else{
+                    cnt++;
+                }
+            }
+            else{
+                cnt = 1;
+            }
+        }
+    }
+
+    ll ans = 0;
+    for(auto p : mp){
+        ans += p.second;
+    }
+    cout << ans << endl;
 
     return 0;
 }

@@ -12,7 +12,7 @@ typedef long long ll;
 #define pb push_back
 #define eb emplace_back
 #define pob pop_back
-#define si(a) (int)a.size()
+#define si(a) (ll)a.size()
 #define all(a) a.begin(),a.end()
 #define rall(a) a.rbegin(),a.rend()
 #define ret(x) { cout<<(x)<<endl;}
@@ -33,7 +33,22 @@ ll ceil(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
-    
+    ll M,D;
+    cin >> M >> D;
+    ll y,m,d;
+    cin >> y >> m >> d;
+
+    if(m == M && d == D){
+        cout << y + 1 << " " << 1 << " " << 1 << endl;
+        return 0;
+    }
+    else if(d == D){
+        cout << y << " " << m + 1 << " " << 1 << endl;
+        return 0;
+    }
+    else{
+        cout << y << " " << m << " " << d + 1 << endl;
+    }
 
     return 0;
 }
