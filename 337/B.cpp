@@ -29,21 +29,43 @@ void chmax(ll& x,ll y){x = max(x,y);}
 ll getnum(ll x, ll y, ll H, ll W) { (void) H; return (x * W + y);}
 template<typename T>
 void print(vector<T> &p){rep(i,si(p)) cout << p[i] << " "; cout << endl;}
-ll ceilLL(ll x , ll y){return (x+y-1)/y;}
-// 多倍長テンプレ
-/* ---------------------- ここから ---------------------- */
-// #include <boost/multiprecision/cpp_dec_float.hpp>
-// #include <boost/multiprecision/cpp_int.hpp>
-// namespace mp = boost::multiprecision;
-// // 任意長整数型
-// using Bint = mp::cpp_int;
-// // 仮数部が10進数で1024桁の浮動小数点数型(TLEしたら小さくする)
-// using Real = mp::number<mp::cpp_dec_float<1024>>;
-// /* ---------------------- ここまで ---------------------- */
+ll ceil(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
-    
+    string s;
+    cin >> s;
+
+    ll li = 0;
+
+    rep(i,si(s)){
+        if(li == 0 && s[i] != 'A'){
+            if(s[i] == 'B'){
+                li++;
+                continue;
+            }
+            else{
+                li += 2;
+                continue;
+            }
+            cout << "No" << endl;
+            return 0;
+        }
+        else if(li == 1 && s[i] != 'B'){
+            if(s[i] == 'C'){
+                li++;
+                continue;
+            }
+            cout << "No" << endl;
+            return 0;
+        }
+        else if(li == 2 && s[i] != 'C'){
+            cout << "No" << endl;
+            return 0;
+        }
+    }
+
+    cout << "Yes" << endl;
 
     return 0;
 }

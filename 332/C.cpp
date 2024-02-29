@@ -29,21 +29,37 @@ void chmax(ll& x,ll y){x = max(x,y);}
 ll getnum(ll x, ll y, ll H, ll W) { (void) H; return (x * W + y);}
 template<typename T>
 void print(vector<T> &p){rep(i,si(p)) cout << p[i] << " "; cout << endl;}
-ll ceilLL(ll x , ll y){return (x+y-1)/y;}
-// 多倍長テンプレ
-/* ---------------------- ここから ---------------------- */
-// #include <boost/multiprecision/cpp_dec_float.hpp>
-// #include <boost/multiprecision/cpp_int.hpp>
-// namespace mp = boost::multiprecision;
-// // 任意長整数型
-// using Bint = mp::cpp_int;
-// // 仮数部が10進数で1024桁の浮動小数点数型(TLEしたら小さくする)
-// using Real = mp::number<mp::cpp_dec_float<1024>>;
-// /* ---------------------- ここまで ---------------------- */
+ll ceil(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
-    
+    ll n,m;
+    cin >> n >> m;
+    string s;
+    cin >> s;
+    ll ans = 0;
+    ll tmp = 0;
+    ll lm = m;
+    rep(i,n){
+        if(s[i] == '0'){
+            lm = m;
+            tmp = 0;
+        }
+        else if(s[i] == '1'){
+            if(lm == 0){
+                tmp++;
+            }
+            else{
+                lm--;
+            }
+        }
+        else{
+            tmp++;
+        }
+        chmax(ans,tmp);
+    }
+
+    cout << ans << endl;
 
     return 0;
 }

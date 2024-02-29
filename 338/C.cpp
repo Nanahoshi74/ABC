@@ -29,21 +29,66 @@ void chmax(ll& x,ll y){x = max(x,y);}
 ll getnum(ll x, ll y, ll H, ll W) { (void) H; return (x * W + y);}
 template<typename T>
 void print(vector<T> &p){rep(i,si(p)) cout << p[i] << " "; cout << endl;}
-ll ceilLL(ll x , ll y){return (x+y-1)/y;}
-// 多倍長テンプレ
-/* ---------------------- ここから ---------------------- */
-// #include <boost/multiprecision/cpp_dec_float.hpp>
-// #include <boost/multiprecision/cpp_int.hpp>
-// namespace mp = boost::multiprecision;
-// // 任意長整数型
-// using Bint = mp::cpp_int;
-// // 仮数部が10進数で1024桁の浮動小数点数型(TLEしたら小さくする)
-// using Real = mp::number<mp::cpp_dec_float<1024>>;
-// /* ---------------------- ここまで ---------------------- */
+ll ceil(ll x , ll y){return (x+y-1)/y;}
+
+bool check(vector<ll>&p){
+    rep(i,si(p)){
+        if(p[i] < 0){
+            return false;
+        }
+    }
+    return true;
+}
 
 int main(){
 
-    
+    ll n;
+    cin >> n;
+    vector<ll> q(n) ,cq;
+    rep(i,n){
+        cin >> q[i];
+    }
+    cq = q;
+    vector<ll> a(n), b(n);
+    ll am = LINF;
+    rep(i,n){
+        cin >> a[i];
+        if(a[i] == 0) continue;
+        chmin(am, q[i] / a[i]);
+    }
+    ll bm = LINF;
+    rep(i,n){
+        cin >> b[i];
+        if(b[i] == 0) continue;
+        chmin(bm, q[i] / b[i]);
+    }
+    ll ans = 0;
+
+    rep(i,am+1){
+        ll ok = 0, ng = 1e10;
+        while(abs(ok-ng) > 1){
+            ll m = (ok + ng) / 2;
+            bool v = true;
+            ll tmp = 0;
+            rep(j,n){
+                q[j] -= a[j] * i;
+                q[j] -= b[j] * m;
+            }
+            if(check(q)){
+                ok = m;
+            }
+            else{
+                ng = m;
+            }
+            q = cq;
+        }
+        chmax(ans, i + ok);
+    }
+
+    cout << ans << endl;
+
+
+
 
     return 0;
 }

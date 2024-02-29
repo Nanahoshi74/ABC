@@ -12,7 +12,7 @@ typedef long long ll;
 #define pb push_back
 #define eb emplace_back
 #define pob pop_back
-#define si(a) (int)a.size()
+#define si(a) (ll)a.size()
 #define all(a) a.begin(),a.end()
 #define rall(a) a.rbegin(),a.rend()
 #define ret(x) { cout<<(x)<<endl;}
@@ -29,20 +29,32 @@ void chmax(ll& x,ll y){x = max(x,y);}
 ll getnum(ll x, ll y, ll H, ll W) { (void) H; return (x * W + y);}
 template<typename T>
 void print(vector<T> &p){rep(i,si(p)) cout << p[i] << " "; cout << endl;}
-ll ceilLL(ll x , ll y){return (x+y-1)/y;}
-// 多倍長テンプレ
-/* ---------------------- ここから ---------------------- */
-// #include <boost/multiprecision/cpp_dec_float.hpp>
-// #include <boost/multiprecision/cpp_int.hpp>
-// namespace mp = boost::multiprecision;
-// // 任意長整数型
-// using Bint = mp::cpp_int;
-// // 仮数部が10進数で1024桁の浮動小数点数型(TLEしたら小さくする)
-// using Real = mp::number<mp::cpp_dec_float<1024>>;
-// /* ---------------------- ここまで ---------------------- */
+ll ceil(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
+    string s;
+    cin >> s;
+    bool ok = true;
+    if(s[0] >= 'A' && s[0] <= 'Z'){
+        rng(i,1,si(s)){
+            if(s[i] >= 'a' && s[i] <= 'z'){
+
+            }
+            else{
+                ok = false;
+            }
+        }
+    }
+    else{
+        ok = false;
+    }
+    if(ok){
+        cout << "Yes" << endl;
+    }
+    else{
+        cout << "No" << endl;
+    }
     
 
     return 0;

@@ -43,7 +43,35 @@ ll ceilLL(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
+    ll n;
+    cin >> n;
+    string s;
+    cin >> s;
+    ll q;
+    cin >> q;
+    string t, u;
+    for(char c = 'a'; c <= 'z'; c++){
+        t += c;
+    }
+    u = t;
     
+    while(q--){
+        char c,d;
+        cin >> c >> d;
+        rep(i,si(t)){
+            if(t[i] == c){
+                t[i] = d;
+            }
+        }
+    }
+    rep(i,n){
+        rep(j,si(u)){
+            if(u[j] == s[i]){
+                s[i] = t[j];
+            }
+        }
+    }
+    cout << s << endl;
 
     return 0;
 }

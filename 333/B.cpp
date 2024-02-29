@@ -29,21 +29,53 @@ void chmax(ll& x,ll y){x = max(x,y);}
 ll getnum(ll x, ll y, ll H, ll W) { (void) H; return (x * W + y);}
 template<typename T>
 void print(vector<T> &p){rep(i,si(p)) cout << p[i] << " "; cout << endl;}
-ll ceilLL(ll x , ll y){return (x+y-1)/y;}
-// 多倍長テンプレ
-/* ---------------------- ここから ---------------------- */
-// #include <boost/multiprecision/cpp_dec_float.hpp>
-// #include <boost/multiprecision/cpp_int.hpp>
-// namespace mp = boost::multiprecision;
-// // 任意長整数型
-// using Bint = mp::cpp_int;
-// // 仮数部が10進数で1024桁の浮動小数点数型(TLEしたら小さくする)
-// using Real = mp::number<mp::cpp_dec_float<1024>>;
-// /* ---------------------- ここまで ---------------------- */
+ll ceil(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
-    
+    vector<char> p = {'A','B','C','D','E'};
+    map<char,ll> mp;
+    rep(i,5){
+        mp['A' + i] = i;
+    }
+    string s,t;
+    cin >> s;
+    cin >> t;
+
+    ll z1 = s[0]-'A';
+    string s2;
+    s2 += 'A';
+    s2 += p[mod(mp[s[1]] - z1, 5)];
+
+    ll z2 = t[0]-'A';
+    string t2;
+    t2 += 'A';
+    t2 += p[mod(mp[t[1]] - z2, 5)];
+    // ret(s2)
+    // ret(t2)
+
+    bool ok = false;
+
+    if(s2 == "AE"){
+        if(t2 == "AE" || t2 == "AB") ok = true;
+    }
+    else if(s2 == "AB"){
+        if(t2 == "AE" || t2 == "AB") ok = true;
+    }
+    else if(s2 == "AD"){
+        if(t2 == "AC" || t2 == "AD") ok = true;
+    }
+    else if(s2 == "AC"){
+        if(t2 == "AD" || t2 == "AC") ok = true;
+    }
+
+    if(ok){
+        cout << "Yes" << endl;
+    }
+    else{
+        cout << "No" << endl;
+    }
+
 
     return 0;
 }

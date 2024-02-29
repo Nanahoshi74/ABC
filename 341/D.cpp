@@ -31,7 +31,7 @@ template<typename T>
 void print(vector<T> &p){rep(i,si(p)) cout << p[i] << " "; cout << endl;}
 ll ceilLL(ll x , ll y){return (x+y-1)/y;}
 // 多倍長テンプレ
-/* ---------------------- ここから ---------------------- */
+// /* ---------------------- ここから ---------------------- */
 // #include <boost/multiprecision/cpp_dec_float.hpp>
 // #include <boost/multiprecision/cpp_int.hpp>
 // namespace mp = boost::multiprecision;
@@ -43,7 +43,31 @@ ll ceilLL(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
-    
+    ll n,m, k;
+    cin >> n >> m >> k;
+
+    ll l = lcm(n, m);
+
+    auto f = [&](ll x){
+        ll c = x / n + x / m - x / l * 2;
+        return c;
+    };
+
+    ll ng = 0, ok = 2e18;
+    while(abs(ok - ng) > 1){
+        ll m = (ok + ng) / 2;
+        if(m == 9){
+            ret(f(m))
+        }
+        if(f(m) >= k){
+            ok = m;
+        }
+        else{
+            ng = m;
+        }
+    }
+
+    cout << ok << endl;
 
     return 0;
 }

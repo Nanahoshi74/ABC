@@ -29,20 +29,54 @@ void chmax(ll& x,ll y){x = max(x,y);}
 ll getnum(ll x, ll y, ll H, ll W) { (void) H; return (x * W + y);}
 template<typename T>
 void print(vector<T> &p){rep(i,si(p)) cout << p[i] << " "; cout << endl;}
-ll ceilLL(ll x , ll y){return (x+y-1)/y;}
-// 多倍長テンプレ
-/* ---------------------- ここから ---------------------- */
-// #include <boost/multiprecision/cpp_dec_float.hpp>
-// #include <boost/multiprecision/cpp_int.hpp>
-// namespace mp = boost::multiprecision;
-// // 任意長整数型
-// using Bint = mp::cpp_int;
-// // 仮数部が10進数で1024桁の浮動小数点数型(TLEしたら小さくする)
-// using Real = mp::number<mp::cpp_dec_float<1024>>;
-// /* ---------------------- ここまで ---------------------- */
+ll ceil(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
+    ll h,w;
+    cin >> h >> w;
+    vector<vector<ll>> a(h,vector<ll>(w)),b(h,vector<ll>(w));
+    rep(i,h){
+        rep(j,w){
+            cin >> a[i][j];
+        }
+    }
+    rep(i,h){
+        rep(j,w){
+            cin >> b[i][j];
+        }
+    }
+
+    queue<vector<vector<ll>>> q;
+    map<vector<vector<ll>>,ll> dist;
+    auto push = [&](vector<vector<ll>> &s, ll d){
+        //sにdの距離でいけるとき
+        if(dist.count(s)) return;
+        dist[s] = d;
+        q.push(s);
+    };
+
+    push(a,0);
+    while(!q.empty()){
+        vector<vector<ll>> s = q.front();
+        q.pop();
+        ll d = dist[s];
+        rep(i,h-1){
+            vector<vector<ll>> ns = s;
+            swap(ns[i],ns[i+1]);
+            push(ns,d+1);    
+        }
+        rep(j,w-1){
+            vector<vector<ll>> ns = s;
+            rep(i,h){
+                swap(ns[i][j], ns[i][j+1]);
+            }
+            push(ns, d+1);
+        }
+    }
+
+    if(dist.count(b)) cout << dist[b] << endl;
+    else cout << -1 << endl;
     
 
     return 0;

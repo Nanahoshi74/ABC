@@ -12,7 +12,7 @@ typedef long long ll;
 #define pb push_back
 #define eb emplace_back
 #define pob pop_back
-#define si(a) (int)a.size()
+#define si(a) (ll)a.size()
 #define all(a) a.begin(),a.end()
 #define rall(a) a.rbegin(),a.rend()
 #define ret(x) { cout<<(x)<<endl;}
@@ -31,7 +31,7 @@ template<typename T>
 void print(vector<T> &p){rep(i,si(p)) cout << p[i] << " "; cout << endl;}
 ll ceilLL(ll x , ll y){return (x+y-1)/y;}
 // 多倍長テンプレ
-/* ---------------------- ここから ---------------------- */
+// /* ---------------------- ここから ---------------------- */
 // #include <boost/multiprecision/cpp_dec_float.hpp>
 // #include <boost/multiprecision/cpp_int.hpp>
 // namespace mp = boost::multiprecision;
@@ -43,7 +43,39 @@ ll ceilLL(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
-    
+    string s;
+    cin >> s;
+
+    string t = s;
+
+    sort(all(s));
+
+    vector<pair<char,ll>> pa;
+    pa.emplace_back(s[0], 1);
+    rng(i,1,si(s)){
+        if(pa.back().first == s[i]){
+            pa.back().second++;
+        }
+        else{
+            pa.emplace_back(s[i], 1);
+        }
+    }
+    ll ans = LINF;
+    char c ;
+    rep(i,si(pa)){
+        if(ans > pa[i].second){
+            c = pa[i].first;
+            ans = pa[i].second;
+        }
+    }
+
+    rep(i,si(s)){
+        if(c == t[i]){
+            cout << i + 1 << endl;
+            return 0;
+        }
+    }
+
 
     return 0;
 }

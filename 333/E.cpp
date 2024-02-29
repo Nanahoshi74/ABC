@@ -29,21 +29,73 @@ void chmax(ll& x,ll y){x = max(x,y);}
 ll getnum(ll x, ll y, ll H, ll W) { (void) H; return (x * W + y);}
 template<typename T>
 void print(vector<T> &p){rep(i,si(p)) cout << p[i] << " "; cout << endl;}
-ll ceilLL(ll x , ll y){return (x+y-1)/y;}
-// 多倍長テンプレ
-/* ---------------------- ここから ---------------------- */
-// #include <boost/multiprecision/cpp_dec_float.hpp>
-// #include <boost/multiprecision/cpp_int.hpp>
-// namespace mp = boost::multiprecision;
-// // 任意長整数型
-// using Bint = mp::cpp_int;
-// // 仮数部が10進数で1024桁の浮動小数点数型(TLEしたら小さくする)
-// using Real = mp::number<mp::cpp_dec_float<1024>>;
-// /* ---------------------- ここまで ---------------------- */
+ll ceil(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
-    
+    ll n;
+    cin >> n;
+    // ll cnt = 0;
+    ll one_cnt = 0;
+    vector<ll> T(n), X(n);
+
+    rep(i,n){
+        ll t,x;
+        cin >> t >> x;
+        T[i] = t, X[i] = x;
+    }
+    vector<ll> ans;
+    vector<set<ll>> st(n + 1);
+    unordered_set<ll> t;
+    rep(i,n){
+        if(T[i] == 1){
+            st[X[i]].insert(i);
+        }
+        else{
+            if(st[X[i]].empty()){
+                cout << -1 << endl;
+                return 0;
+            }
+            ll ind = *st[X[i]].rbegin();
+            st[X[i]].erase(ind);
+            t.insert(ind);
+            // ans[ind] = 1;
+        }
+    }
+
+    rep(i,n){
+        if(T[i] == 1){
+            if(t.count(i)){
+                ans.push_back(1);
+            }
+            else{
+                ans.push_back(0);
+            }
+        }
+    }
+
+    ll cnt_ans = 0;
+    ll cnt = 0;
+
+    rep(i,n){
+        if(T[i] == 1 && t.count(i)){
+            cnt++;
+            chmax(cnt_ans,cnt);
+        }
+        else if(T[i] == 2){
+            cnt--;
+        }
+    }
+ 
+ 
+
+    cout << cnt_ans << endl;
+
+    for(auto a : ans){
+        cout << a << " ";
+    }
+    cout << endl;
+
 
     return 0;
 }

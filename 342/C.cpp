@@ -43,7 +43,55 @@ ll ceilLL(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
-    
+    ll n;
+    cin >> n;
+    string s;
+    cin >> s;
+    ll q;
+    cin >> q;
+
+    map<char, vector<ll>> mp;
+
+    rep(i,n){
+        mp[s[i]].push_back(i);
+    }
+
+    while(q--){
+        char c, d;
+        cin >> c >> d;
+        if(c == d || !mp.count(c)) continue;
+        if(si(mp[c]) > si(mp[d])){
+            for(auto z : mp[d]){
+                mp[c].push_back(z);
+            }
+            mp[d].clear();
+            swap(mp[d], mp[c]);
+        }
+        else{
+            for(auto z : mp[c]){
+                mp[d].push_back(z);
+            }
+            mp[c].clear();
+        }
+    //     for(auto g : mp){
+    //     cout << g.first << endl;
+    //     rep(i,si(g.second)){
+    //         cout << g.second[i] << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << "//////////////////////" << endl;
+    }
+    string ans;
+    for(auto z : mp){
+        vector<ll> &d = z.second;
+        if(si(d) == 0) continue;
+        for(auto i : d){
+            s[i] = z.first;
+        }
+    }
+
+    cout << s << endl;
 
     return 0;
 }

@@ -29,21 +29,38 @@ void chmax(ll& x,ll y){x = max(x,y);}
 ll getnum(ll x, ll y, ll H, ll W) { (void) H; return (x * W + y);}
 template<typename T>
 void print(vector<T> &p){rep(i,si(p)) cout << p[i] << " "; cout << endl;}
-ll ceilLL(ll x , ll y){return (x+y-1)/y;}
-// 多倍長テンプレ
-/* ---------------------- ここから ---------------------- */
-// #include <boost/multiprecision/cpp_dec_float.hpp>
-// #include <boost/multiprecision/cpp_int.hpp>
-// namespace mp = boost::multiprecision;
-// // 任意長整数型
-// using Bint = mp::cpp_int;
-// // 仮数部が10進数で1024桁の浮動小数点数型(TLEしたら小さくする)
-// using Real = mp::number<mp::cpp_dec_float<1024>>;
-// /* ---------------------- ここまで ---------------------- */
+ll ceil(ll x , ll y){return (x+y-1)/y;}
+
+int op(int a, int b){
+    //2つの要素をとってきた時にどう計算した結果を返すか
+    return max(a, b);
+}
+int e(){
+    //空っぽのものの値をどうするか
+    return 0;
+}
 
 int main(){
 
-    
+    int n, d;
+    cin >> n >> d;
+
+    vector<int> a(n);
+    rep(i,n){
+        cin >> a[i];
+    }
+    const int M = 500005;
+    segtree<int, op, e> dp(M);
+    rep(i,n){
+        int l = a[i]-d, r = a[i] + d+1;
+        l = max(0, l);
+        r = min(r, M);
+        int now = dp.prod(l,r) + 1;
+        cout << dp.prod(l, r) << endl;
+        dp.set(a[i], now);
+    }
+    int ans = dp.prod(0, M);
+    cout << ans << endl;
 
     return 0;
 }

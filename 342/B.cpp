@@ -43,7 +43,28 @@ ll ceilLL(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
-    
+    ll n;
+    cin >> n;
+    vector<ll> r(n);
+    rep(i,n){
+        cin >> r[i];
+    }
+    ll q;
+    cin >> q;
+    while(q--){
+        ll a,b;
+        cin >> a >> b;
+        rep(i,n){
+            if(r[i] == a){
+                cout << a << endl;
+                break;
+            }
+            else if(r[i] == b){
+                cout << b << endl;
+                break;
+            }
+        }
+    }
 
     return 0;
 }

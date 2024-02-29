@@ -31,7 +31,7 @@ template<typename T>
 void print(vector<T> &p){rep(i,si(p)) cout << p[i] << " "; cout << endl;}
 ll ceilLL(ll x , ll y){return (x+y-1)/y;}
 // 多倍長テンプレ
-/* ---------------------- ここから ---------------------- */
+// /* ---------------------- ここから ---------------------- */
 // #include <boost/multiprecision/cpp_dec_float.hpp>
 // #include <boost/multiprecision/cpp_int.hpp>
 // namespace mp = boost::multiprecision;
@@ -41,9 +41,65 @@ ll ceilLL(ll x , ll y){return (x+y-1)/y;}
 // using Real = mp::number<mp::cpp_dec_float<1024>>;
 // /* ---------------------- ここまで ---------------------- */
 
+ll nCk(ll a,ll b){
+    ll p = 1;
+    for(int i = 1; i <= b; i++){
+        p *= a-i+1;
+        p /= i;
+    }
+    return p;
+}
+
 int main(){
 
+    ll n;
+    cin >> n;
+    vector<ll> a(n);
+    rep(i,n){
+        cin >> a[i];
+    }
+
+    ll ans = 0;
+    rep(i,n){
+        if(a[i] == 0){
+            continue;
+        }
+        else{
+            ll hi = 1;
+            rng(j,1,LINF){
+                if(j * j > a[i]) break;
+                if(a[i] % (j*j) == 0){
+                    hi = j;
+                }
+            }
+            a[i] /= (hi * hi);
+        }
+    }
+    // print(a);
+    sort(all(a));
+
+    map<ll,vector<ll>> mp;
+    rep(i,n){
+        mp[a[i]].push_back(i);
+    }
+    for(auto p : mp){
+        if(p.first == 0){
+            vector<ll> &z = p.second;
+            for(auto li : z){
+                ans += n-li-1;
+            }
+        }
+        else{
+            ll size = si(p.second);
+            ans += nCk(size, 2);
+        }
+    }
+
+    cout << ans << endl;
+
     
+
+
 
     return 0;
 }

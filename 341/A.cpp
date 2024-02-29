@@ -12,7 +12,7 @@ typedef long long ll;
 #define pb push_back
 #define eb emplace_back
 #define pob pop_back
-#define si(a) (int)a.size()
+#define si(a) (ll)a.size()
 #define all(a) a.begin(),a.end()
 #define rall(a) a.rbegin(),a.rend()
 #define ret(x) { cout<<(x)<<endl;}
@@ -32,18 +32,42 @@ void print(vector<T> &p){rep(i,si(p)) cout << p[i] << " "; cout << endl;}
 ll ceilLL(ll x , ll y){return (x+y-1)/y;}
 // 多倍長テンプレ
 /* ---------------------- ここから ---------------------- */
-// #include <boost/multiprecision/cpp_dec_float.hpp>
-// #include <boost/multiprecision/cpp_int.hpp>
-// namespace mp = boost::multiprecision;
-// // 任意長整数型
-// using Bint = mp::cpp_int;
-// // 仮数部が10進数で1024桁の浮動小数点数型(TLEしたら小さくする)
-// using Real = mp::number<mp::cpp_dec_float<1024>>;
-// /* ---------------------- ここまで ---------------------- */
+#include <boost/multiprecision/cpp_dec_float.hpp>
+#include <boost/multiprecision/cpp_int.hpp>
+namespace mp = boost::multiprecision;
+// 任意長整数型
+using Bint = mp::cpp_int;
+// 仮数部が10進数で1024桁の浮動小数点数型(TLEしたら小さくする)
+using Real = mp::number<mp::cpp_dec_float<1024>>;
+/* ---------------------- ここまで ---------------------- */
 
 int main(){
 
-    
+    ll n;
+    cin >> n;
+    string s;
+    string t;
+    rep(i,n+1){
+        s += '1';
+    }
+    rep(i,n){
+        t += '0';
+    }
+    string ans;
+    ll a = 0;
+    ll b = 0, c = 0;
+    rep(i,2*n+1){
+        if(a % 2 == 0){
+            ans += s[b];
+            b++;
+        }
+        else{
+            ans += t[c];
+            c++;
+        }
+        a++;
+    }
+    cout << ans << endl;
 
     return 0;
 }

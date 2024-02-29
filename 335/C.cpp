@@ -29,21 +29,48 @@ void chmax(ll& x,ll y){x = max(x,y);}
 ll getnum(ll x, ll y, ll H, ll W) { (void) H; return (x * W + y);}
 template<typename T>
 void print(vector<T> &p){rep(i,si(p)) cout << p[i] << " "; cout << endl;}
-ll ceilLL(ll x , ll y){return (x+y-1)/y;}
-// 多倍長テンプレ
-/* ---------------------- ここから ---------------------- */
-// #include <boost/multiprecision/cpp_dec_float.hpp>
-// #include <boost/multiprecision/cpp_int.hpp>
-// namespace mp = boost::multiprecision;
-// // 任意長整数型
-// using Bint = mp::cpp_int;
-// // 仮数部が10進数で1024桁の浮動小数点数型(TLEしたら小さくする)
-// using Real = mp::number<mp::cpp_dec_float<1024>>;
-// /* ---------------------- ここまで ---------------------- */
+ll ceil(ll x , ll y){return (x+y-1)/y;}
 
 int main(){
 
-    
+    ll n,q;
+    cin >> n >> q;
+
+    deque<P> dq;
+    rep(i,n){
+        dq.emplace_back(i+1,0);
+    }
+
+    rep(i,q){
+        ll a;
+        cin >> a;
+        if(a == 1){
+            char c;
+            cin >> c;
+            if(c == 'R'){
+                dq.push_front(P(dq.front().first + 1,dq.front().second));
+                dq.pop_back();
+            }
+            else if(c == 'L'){
+                dq.push_front(P(dq.front().first - 1,dq.front().second));
+                dq.pop_back();
+            }
+            else if(c == 'U'){
+                dq.push_front(P(dq.front().first,dq.front().second + 1));
+                dq.pop_back();
+            }
+            else{
+                dq.push_front(P(dq.front().first,dq.front().second - 1));
+                dq.pop_back();
+            }
+        }
+        else{
+            ll p;
+            cin >> p;
+            p--;
+            cout << dq[p].first << " " << dq[p].second << endl;
+        }
+    }
 
     return 0;
 }
